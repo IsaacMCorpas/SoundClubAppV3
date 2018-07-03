@@ -1,0 +1,585 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "Sample API",
+    "description": "API description in Markdown.",
+    "version": "1.0.0"
+  },
+  "host": "api.soundclub.com",
+  "basePath": "/v1",
+  "schemes": [
+    "https"
+  ],
+  "paths": {
+    "/pais": {
+      "get": {
+        "tags": [
+          "pais"
+        ],
+        "description": "Obtener lista de paises",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "pais",
+            "in": "path",
+            "description": "ID of city to return",
+            "required": true,
+            "type": "integer",
+            "format": "int64"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Lista de paises obtenida",
+            "schema": {
+              "type": "string",
+              "items": {
+                "$ref": "#/definitions/Pais"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/pais/{paisId}": {
+      "get": {
+        "tags": [
+          "pais"
+        ],
+        "summary": "Encuentra un pais por id",
+        "description": "devuelve un pais",
+        "operationId": "getPaisID",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "paisId",
+            "in": "path",
+            "description": "ID of city to return",
+            "required": true,
+            "type": "integer",
+            "format": "int64"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "successful operation",
+            "schema": {
+              "$ref": "#/definitions/Pais"
+            }
+          }
+        }
+      }
+    },
+    "/genero_musical": {
+      "get": {
+        "tags": [
+          "genero_musical"
+        ],
+        "description": "Obtener lista de genero_musical",
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "Lista de genero_musical obtenida",
+            "schema": {
+              "type": "string",
+              "items": {
+                "$ref": "#/definitions/Genero_Musical"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/genero_musical/{genero_musicalId}": {
+      "get": {
+        "tags": [
+          "genero_musicalId"
+        ],
+        "summary": "Encuentra un genero_musical por id",
+        "description": "devuelve un genero_musical",
+        "operationId": "getgGenero_musicalById",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "genero_musicalId",
+            "in": "path",
+            "description": "ID of genero_musical to return",
+            "required": true,
+            "type": "integer",
+            "format": "int64"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "successful operation",
+            "schema": {
+              "$ref": "#/definitions/Genero_Musical"
+            }
+          }
+        }
+      }
+    },
+    "/usuario/query": {
+      "get": {
+        "tags": [
+          "usuarioQuery"
+        ],
+        "summary": "encontrar al usuario relacionado con el valor",
+        "operationId": "getListaUsuarioRespuesta",
+        "produces": [
+          "application/json"
+        ],
+        "consumes": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "name",
+            "in": "query",
+            "description": "El nombre de los usuarios",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "successful operation",
+            "schema": {
+              "$ref": "#/definitions/Usuario"
+            }
+          }
+        }
+      }
+    },
+    "/instrumento": {
+      "get": {
+        "tags": [
+          "instrumento"
+        ],
+        "description": "Obtener lista de instrumentos",
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "Lista de intrumentos obtenida",
+            "schema": {
+              "type": "string",
+              "items": {
+                "$ref": "#/definitions/Instrumento"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/instrumento/{instrumentoId}": {
+      "get": {
+        "tags": [
+          "instrumento"
+        ],
+        "summary": "Encuentra un instrumento por id",
+        "description": "devuelve un instrumento",
+        "operationId": "getInstrumentoById",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "instrumentoId",
+            "in": "path",
+            "description": "ID of instrumento to return",
+            "required": true,
+            "type": "integer",
+            "format": "int64"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "successful operation",
+            "schema": {
+              "$ref": "#/definitions/Instrumento"
+            }
+          }
+        }
+      }
+    },
+    "/usuario": {
+      "post": {
+        "tags": [
+          "usuario"
+        ],
+        "summary": "Añadir nuevo Usuario",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "nuevoUsuario",
+            "description": "Objeto Usuario que se va a añadir.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Usuario"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Lista de usuarios obtenida",
+            "schema": {
+              "type": "string",
+              "items": {
+                "$ref": "#/definitions/Usuario"
+              }
+            }
+          },
+          "405": {
+            "description": "Invalid input"
+          }
+        }
+      },
+      "get": {
+        "tags": [
+          "usuario"
+        ],
+        "description": "Obtener lista de usuarios",
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "Lista de usuarios obtenida",
+            "schema": {
+              "type": "string",
+              "items": {
+                "$ref": "#/definitions/Usuario"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/usuario/{usuarioId}": {
+      "get": {
+        "tags": [
+          "usuario"
+        ],
+        "summary": "Encuentra un usuario por id",
+        "description": "devuelve un usuario",
+        "operationId": "getUsuarioID",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "usuarioId",
+            "in": "path",
+            "description": "Obten un usuario",
+            "required": true,
+            "type": "integer"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "successful operation",
+            "schema": {
+              "$ref": "#/definitions/Usuario"
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "usuario"
+        ],
+        "summary": "Borrar Usuario existente",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "usuarioId",
+            "in": "path",
+            "description": "Borra a un usuario relacionado con el ID",
+            "required": true,
+            "type": "integer"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "successful operation",
+            "schema": {
+              "$ref": "#/definitions/Usuario"
+            }
+          },
+          "405": {
+            "description": "Invalid input"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "usuario"
+        ],
+        "summary": "Actualizar Usuario existente",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "usuarioId",
+            "in": "path",
+            "description": "ID of usuario to return",
+            "required": true,
+            "type": "integer"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "successful operation",
+            "schema": {
+              "$ref": "#/definitions/Usuario"
+            }
+          },
+          "405": {
+            "description": "Invalid input"
+          }
+        }
+      }
+    },
+    "/usuario/{id}/generos_musicales": {
+      "get": {
+        "summary": "devuelve la lista de todos los generos musicales con el id de usuario",
+        "operationId": "getGeneroMusicalIDUsuario",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "id",
+            "type": "integer",
+            "required": true,
+            "description": "id del usuario del que tengo que obtener los generos musicales"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "successful operation",
+            "schema": {
+              "$ref": "#/definitions/Genero_Musical"
+            }
+          },
+          "400": {
+            "description": "Invalido ID"
+          }
+        }
+      }
+    },
+    "/usuario/{id}/Instrumentos": {
+      "get": {
+        "summary": "devuelve la lista de todos los instrumentos que sabe tocar el usuario con el id de usuario",
+        "operationId": "GetInstrumentoIdUsuario",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "id",
+            "type": "integer",
+            "required": true,
+            "description": "id del usuario del que tengo que obtener sus amigos"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "successful operation",
+            "schema": {
+              "$ref": "#/definitions/Instrumento"
+            }
+          },
+          "400": {
+            "description": "Invalido ID"
+          }
+        }
+      }
+    },
+    "/usuario/{id}/amigos": {
+      "get": {
+        "summary": "devuelve la lista de todos los amigos del usuario con el id de usuario",
+        "operationId": "GetAmigosIdUsuario",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "id",
+            "type": "integer",
+            "required": true,
+            "description": "id del usuario del que tengo que obtener sus amigos"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "successful operation",
+            "schema": {
+              "$ref": "#/definitions/Usuario"
+            }
+          },
+          "400": {
+            "description": "Invalido ID"
+          }
+        }
+      }
+    }
+  },
+  "securityDefinitions": null,
+  "components": {
+    "securitySchemes": {
+      "soundclub_auth": {
+        "type": "http",
+        "scheme": "bearer",
+        "bearerFormat": "JWT"
+      }
+    }
+  },
+  "definitions": {
+    "Usuario": {
+      "type": "object",
+      "properties": {
+        "uid": {
+          "type": "integer"
+        },
+        "nombre": {
+          "type": "string"
+        },
+        "apellidos": {
+          "type": "string"
+        },
+        "email": {
+          "type": "string"
+        },
+        "password": {
+          "type": "string"
+        },
+        "ciudad_recide": {
+          "type": "string"
+        },
+        "calle": {
+          "type": "string"
+        },
+        "fecha_nacimiento": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "sexo": {
+          "type": "integer"
+        },
+        "foto": {
+          "type": "string"
+        },
+        "generoM_usuario": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Genero_Musical"
+          }
+        },
+        "instrumento_usuario": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Instrumento"
+          }
+        },
+        "pais_recide": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Pais"
+          }
+        },
+        "amigos_usuario": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Usuario"
+          }
+        }
+      }
+    },
+    "Pais": {
+      "type": "object",
+      "properties": {
+        "cid": {
+          "type": "integer"
+        },
+        "codigo": {
+          "type": "integer"
+        },
+        "nombre": {
+          "type": "string"
+        }
+      }
+    },
+    "Instrumento": {
+      "type": "object",
+      "properties": {
+        "iid": {
+          "type": "integer"
+        },
+        "nombre": {
+          "type": "string"
+        }
+      }
+    },
+    "Genero_Musical": {
+      "type": "object",
+      "properties": {
+        "mid": {
+          "type": "integer"
+        },
+        "nombre": {
+          "type": "string"
+        }
+      }
+    },
+    "ApiResponse": {
+      "type": "object",
+      "properties": {
+        "code": {
+          "type": "integer"
+        },
+        "type": {
+          "type": "string"
+        },
+        "message": {
+          "type": "string"
+        }
+      }
+    }
+  },
+  "externalDocs": {
+    "description": "Find out more about Swagger",
+    "url": "http://swagger.io"
+  }
+}
