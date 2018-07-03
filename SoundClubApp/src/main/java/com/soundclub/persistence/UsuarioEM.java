@@ -134,6 +134,24 @@ public class UsuarioEM extends EntityManager{
 		return isOK;
 
 	}
+	public boolean borrar(Usuario borrado) {
+		boolean isoK = false;
+		try {
+		Session session = factory.openSession();
+		Transaction t = session.beginTransaction();
+
+		
+		session.delete(borrado);
+		isoK=true;
+		t.commit();
+		session.close();
+		} catch (Exception e) {
+			ManejoException(e);
+			
+		}
+		return isoK;
+
+	}
 
 	
 	public List<Instrumento> getInstrumentosUsuarioID( int idUsuario) {
