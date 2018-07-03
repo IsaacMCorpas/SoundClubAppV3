@@ -1,0 +1,122 @@
+﻿
+
+/****************************USUARIO****************************************/
+/usuario/{id}/generos_musicales
+:GET  
+:Response: lista de generos_musicales de un usuario 
+curl -X GET   http://localhost:8080/SoundClubApp/api/usuario/1/generos_musicales
+
+/usuario/{id}/amigos
+:GET  
+:Response: lista de amigos de un usuario 
+curl -X GET   http://localhost:8080/SoundClubApp/api/usuario/1/amigos
+
+/usuario/{id}/instrumentos
+:GET  
+:Response: lista de instrumentos que sabe tocar un usuario 
+curl -X GET   http://localhost:8080/SoundClubApp/api/usuario/1/instrumentos
+
+
+//////////////
+curl -X POST -H "Content-Type: application/json" -d '{"id":0,"nombre":"Joselito","apellidos":"","email":"cist@mail.es","password":"123"}' http://localhost:8080/SoundClubApp/api/usuario
+
+//////////usuario con id
+curl -X GET http://localhost:8080/SoundClubApp/api/usuario/1
+
+////borrar con id a un usuario
+curl -X DELETE http://localhost:8080/SoundClubApp/api/usuario/14
+
+///actualizar un usuario
+
+curl -X PUT -H "Content-Type: application/json" -d '{"id":1,"password":"123","nombre":"Carles","pais_recide":{"cid":5,"codigo":"AO","nombre":"Angola"},"foto":"./assets/images/betty.jpg","ciudad_recide":"Barcelona","listaAmigos":[],"sexo":1,"apellidos":"Garro","calle":"C/Travessera de Gracia","fecha_nacimiento":1287957600000,"listaGenero_musical":[],"email":"ca@mail.es","listaInstrumento":[]}' http://localhost:8080/SoundClubApp/api/usuario/1
+
+/////lista usuarios por coincidencia
+curl -X GET http://localhost:8080/SoundClubApp/api/usuario/query?name="c"
+
+
+////////////////Pais/////////////////////
+
+/pais
+
+curl -X GET http://localhost:9090/SoundClubApp/api/pais/
+
+/////////////PaisId//////////////////////////
+
+/pais/{Id}
+
+curl -X GET http://localhost:9090/SoundClubApp/api/pais/72
+
+/////////////Genero_musical//////////////////
+
+/genero_musical
+
+curl -X GET http://localhost:9090/SoundClubApp/api/genero_musical/
+
+/////////Genero_Musical/{Id}////////////////////
+
+/genero_musical/{Id}
+
+curl -X GET http://localhost:9090/SoundClubApp/api/genero_musical/1
+
+//////////////Instrumento/////////////////////
+
+/instrumento
+
+curl -X GET http://localhost:9090/SoundClubApp/api/instrumento/
+
+//////////Instrumento/{Id}////////
+
+/instrumento/{Id}
+
+curl -X GET http://localhost:9090/SoundClubApp/api/instrumento/1
+
+/***************************************CON TOKEN************************************************/
+me autentifico
+curl -H "Content-Type: application/json" -H "email:ca@mail.es" -H "password:123" -v -X GET  http://localhost:8080/SoundClubApp/api/authenticate
+
+
+/usuario/{id}/generos_musicales
+:GET  
+:Response: lista de generos_musicales de un usuario 
+curl -X GET -H "token: "   http://localhost:8080/SoundClubApp/api/usuario/1/generos_musicales
+
+
+/usuario/{id}/instrumentos
+:GET  
+:Response: lista de instrumentos de un usuario 
+curl -X GET -H "token: "   http://localhost:8080/SoundClubApp/api/usuario/1/instrumentos
+
+/usuario/{id}/amigos
+:GET  
+:Response: lista de amigos de un usuario 
+curl -X GET -H "token: "   http://localhost:8080/SoundClubApp/api/usuario/1/amigos
+
+////Me autentifico, obtengo token
+curl -H "Content-Type: application/json" -H  "email: ca@mail.es" -H "password: 123" -v -X GET http://localhost:8080/SoundClubApp/api/authenticate
+
+///Buscar lista usuarios con token
+curl -X GET -H "token: " http://localhost:8080/SoundClubApp/api/usuario
+
+///usuario con id
+curl -X GET -H "token: " http://localhost:8080/SoundClubApp/api/usuario/1
+
+///borrar usuario con id
+curl  -H "token: " -X DELETE http://localhost:8080/SoundClubApp/api/usuario/6
+
+///actualizar usuario
+curl -X PUT -H "Content-Type: application/json" -H "token: " -d '{"id":1,"apellidos":"Cegarra","listaAmigos":[],"foto":"./assets/images/betty.jpg","nombre":"Carles","ciudad_recide":"Barcelona","pais_recide":{"nombre":"Angola","cid":5,"codigo":"AO"},"calle":"C/Travessera de Gracia","sexo":1,"password":"123","email":"ca@mail.es","listaGenero_musical":[],"fecha_nacimiento":1287957600000,"listaInstrumento":[]}' http://localhost:8080/SoundClubApp/api/usuario/1
+
+///buscar lista usuarios que coincidan con caracter
+curl -X GET -H "token: " http://localhost:8080/SoundClubApp/api/usuario/query?name="c"
+
+///////////////////genero_musical////////////
+
+curl -H "Content-Type: application/json" -H "token: eyJraWQiOiIxIiwiYWxnIjoiUlMyNTYifQ.eyJpc3MiOiJuZXRtaW5kLmNvbSIsImV4cCI6MTUzMDYyNDQzMywianRpIjoiR1N2WU8tOGVLRTNFdTZ5LUxKV3VFQSIsImlhdCI6MTUzMDYyMzgzMywibmJmIjoxNTMwNjIzNzEzLCJzdWIiOiIxIiwicm9sZXMiOlsiY2xpZW50Il19.ZTR2FTc72ryn1M5Dqb2oyL_vfYDT77wt9o4UJmWCNIVY_N0D9_hqDvJSQPwwRUbgbftNDznAEtwtK4FUsvCVfZo4tOi_6LBCB7zZV0ZNAqGWJGRDpqaaFj7HSw2hLIADFkXpI6MK7hqjB0c-6Ohkp6EuH7KPtP9TIgF_K2f_cTfbpMESyqYmq8jjr6GmBU7RXuysJ1-q-M0v0IBVZtu4PQRK1M8Z0uOYeKtr82jLemwe7uRyCLAWbKssS6k4U5kDDSrf0fDlcr3bVho5h_2fZFbwCRfNKeocxnYv9YuP04BLRJN4q8cfmWaidofSuuiWm7BZxNyrJqwOIGADlnIV0A" -v -X GET http://localhost:9090/SoundClubApp/api/genero_musical/
+
+///////////////////instrumento////////////
+
+curl -H "Content-Type: application/json" -H "token: eyJraWQiOiIxIiwiYWxnIjoiUlMyNTYifQ.eyJpc3MiOiJuZXRtaW5kLmNvbSIsImV4cCI6MTUzMDYyNDQzMywianRpIjoiR1N2WU8tOGVLRTNFdTZ5LUxKV3VFQSIsImlhdCI6MTUzMDYyMzgzMywibmJmIjoxNTMwNjIzNzEzLCJzdWIiOiIxIiwicm9sZXMiOlsiY2xpZW50Il19.ZTR2FTc72ryn1M5Dqb2oyL_vfYDT77wt9o4UJmWCNIVY_N0D9_hqDvJSQPwwRUbgbftNDznAEtwtK4FUsvCVfZo4tOi_6LBCB7zZV0ZNAqGWJGRDpqaaFj7HSw2hLIADFkXpI6MK7hqjB0c-6Ohkp6EuH7KPtP9TIgF_K2f_cTfbpMESyqYmq8jjr6GmBU7RXuysJ1-q-M0v0IBVZtu4PQRK1M8Z0uOYeKtr82jLemwe7uRyCLAWbKssS6k4U5kDDSrf0fDlcr3bVho5h_2fZFbwCRfNKeocxnYv9YuP04BLRJN4q8cfmWaidofSuuiWm7BZxNyrJqwOIGADlnIV0A" -v -X GET http://localhost:9090/SoundClubApp/api/instrumento/
+
+///////////////////pais////////////
+
+curl -H "Content-Type: application/json" -H "token: eyJraWQiOiIxIiwiYWxnIjoiUlMyNTYifQ.eyJpc3MiOiJuZXRtaW5kLmNvbSIsImV4cCI6MTUzMDYyNDQzMywianRpIjoiR1N2WU8tOGVLRTNFdTZ5LUxKV3VFQSIsImlhdCI6MTUzMDYyMzgzMywibmJmIjoxNTMwNjIzNzEzLCJzdWIiOiIxIiwicm9sZXMiOlsiY2xpZW50Il19.ZTR2FTc72ryn1M5Dqb2oyL_vfYDT77wt9o4UJmWCNIVY_N0D9_hqDvJSQPwwRUbgbftNDznAEtwtK4FUsvCVfZo4tOi_6LBCB7zZV0ZNAqGWJGRDpqaaFj7HSw2hLIADFkXpI6MK7hqjB0c-6Ohkp6EuH7KPtP9TIgF_K2f_cTfbpMESyqYmq8jjr6GmBU7RXuysJ1-q-M0v0IBVZtu4PQRK1M8Z0uOYeKtr82jLemwe7uRyCLAWbKssS6k4U5kDDSrf0fDlcr3bVho5h_2fZFbwCRfNKeocxnYv9YuP04BLRJN4q8cfmWaidofSuuiWm7BZxNyrJqwOIGADlnIV0A" -v -X GET http://localhost:9090/SoundClubApp/api/pais/
