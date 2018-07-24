@@ -24,7 +24,6 @@ public class Genero_MusicalAPI extends JSONService {
 	@GET
 	public Response getGeneroMusical(@HeaderParam("token") String token) {
 		int userId = this.getUserIdFromToken(token);
-
 		if (userId <= 0) {
 			StatusMessage statusMessage = new StatusMessage(Status.FORBIDDEN.getStatusCode(),
 					"Access Denied for this functionality !!!");

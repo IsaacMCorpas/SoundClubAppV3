@@ -124,7 +124,8 @@ h1 {
 			</div>
 		
 			Fecha de nacimiento: 
-			<input type="date" name="fecha" value="<fmt:formatDate pattern = "yyyy-MM-dd" value="${usuario.fecha_nacimiento}"">
+			<input type="date" name="fecha" 
+ value="${usuario.fecha_nacimiento}"">
 			
 			
 			<fieldset class="sexo">

@@ -100,7 +100,7 @@ public class AuthService extends JSONService{
 			e.printStackTrace();
 		}
 
-		return Response.status(200).entity(jwt).build();
+		return Response.status(200).entity("{\"token\":\""+jwt+"\"}").build();
 	}
 	
 	
